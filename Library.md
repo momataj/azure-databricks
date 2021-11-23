@@ -1,8 +1,8 @@
-#Install Custom Library in the Azure Databricks
+# Install Custom Library in the Azure Databricks
 
 ## Install Packages in the workspace 
 
-## Create a library folder and Install packages inside the library folder 
+### Create a library folder and Install packages inside the library folder 
          -> Create Folder -> Library
          -> Library Folder-> (Rightclick)Create Library
                   * Select Library source : PYPI
