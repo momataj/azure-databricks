@@ -1,6 +1,25 @@
 
 # Read Data from SQL Database Table using Pyspark
 
+def sqlvm_jdbc_connection(DatabaseName):   
+  """ 
+  Store credentail Azure vault and get the credentials from ecret scope 
+  """
+  
+  Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+  dbUsername = dbutils.secrets.get(scope = "scope_name", key = "scope_key")      # user name from the secret scope
+  dbPwd = dbutils.secrets.get(scope = "scope_name", key = "scope_key")           # password from the secret scope
+  Hostname = dbutils.secrets.get(scope = "scope_name", key = "scope_key")            # SQL Server name
+  Port = dbutils.secrets.get(scope = "scope_name", key = "scope_key")                # DB Port
+    
+  Database = DatabaseName # DB name
+  Url = (f"jdbc:sqlserver://{Hostname}:{Port};database={Database};user={dbUsername};password= {dbPwd}")
+  parameters = {
+      "driver":Driver,
+      "url":Url      
+      }
+  return parameters
+
 def read_db_data(SQL_Query,DatabaseName):
   # Create function of read db table and create dataframe 
   Credentials=sqlvm_jdbc_connection(DatabaseName=DatabaseName)
