@@ -3,7 +3,7 @@
 
 def sqlvm_jdbc_connection(DatabaseName):   
   """ 
-  Store credentail Azure vault and get the credentials from ecret scope 
+  Store credentail Azure vault and get the credentials from secret scope 
   """
   
   Driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
