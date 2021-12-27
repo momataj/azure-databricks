@@ -1,4 +1,4 @@
-# ClassMethod: Get Table Name from spark.catalog.listTables(database) except views and Vacuum
+# ClassMethod: Get Table Name from spark.catalog.listTables(database) except views and others temp tables and Run Vacuum
 class DeltaDatabaseVacuum:
   def __init__(self,DatabaseName, TableInitial):
     self.DatabaseName=DatabaseName
@@ -18,6 +18,7 @@ class DeltaDatabaseVacuum:
         if not table.name.startswith('vw') and  not table.name.endswith('vw') and not table.name.startswith('rpt') and not table.name.endswith('rpt') and  table.name.startswith(self.TableInitial):
           table_names_in_db.append(table.name )      
     return table_names_in_db    
+  
   @classmethod      #vacumm classmethod function
   def _runVacuum(cls,DatabaseName,TableName,RetainPeriod):
     cls.DatabaseName=DatabaseName
@@ -31,6 +32,7 @@ class DeltaDatabaseVacuum:
 DatabaseName=DeltaDatabaseVacuum(DatabaseName=pDatabaseName,TableInitial=pTableInitial )
 tables_collection=DeltaDatabaseVacuum._getTableName(DatabaseName)
 print(f'Total tables starting with {pTableInitial.capitalize()} for Database {pDatabaseName.capitalize()}: {len(tables_collection)}')
+
 for TableName in tables_collection:
   print(f'Vacumm TableName: {TableName}')  
   DeltaDatabaseVacuum._runVacuum(DatabaseName=pDatabaseName,TableName=TableName,RetainPeriod=pRetainPeriod)
