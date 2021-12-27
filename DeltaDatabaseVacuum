@@ -3,6 +3,7 @@ class DeltaDatabaseVacuum:
   def __init__(self,DatabaseName, TableInitial):
     self.DatabaseName=DatabaseName
     self.TableInitial=TableInitial
+  
   def _getTableName(self):  #get Name Instance function
     table_collection = spark.catalog.listTables(self.DatabaseName)
     tables_collectionlist=table_collection
