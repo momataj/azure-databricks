@@ -1,5 +1,5 @@
 #Setup Notebook Parameter
-#dbutils.widgets.text("FileType", "")  #THIS IS THE EXPORT FOLDER THAT THE FILES WILL BE EXPORTED TO
+dbutils.widgets.text("FileType", "")  #THIS IS THE EXPORT FOLDER THAT THE FILES WILL BE EXPORTED TO
 pFileType = dbutils.widgets.get("FileType")
 print(pFileType)
 
