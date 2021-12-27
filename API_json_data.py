@@ -74,7 +74,7 @@ Case insenstive columns
 Will returns the actual column case
 Support the existing datatypes
 Default value can be customizable
-Pass multiple dataframes at once (e.g unionAll(df1, df2, df3, ..., df10))
+Pass dataframe list dfs
 """
  
 from functools import reduce
