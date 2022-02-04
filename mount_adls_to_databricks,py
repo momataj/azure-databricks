@@ -1,0 +1,18 @@
+
+azure_clientid = dbutils.secrets.get(scope="azure_keyvault ",key="azure_clientid_key")
+azure_clientsecret = dbutils.secrets.get(scope="azure_keyvault ",key="azure_clientsecret_key")
+tenantid = dbutils.secrets.get(scope="azure_keyvault",key="databricks-azure-tenant-id")
+StorageAccount= dbutils.secrets.get(scope="azure_keyvault=",key="StorageAccount_key")
+StorageAccount = "NameOfStrorage_account"
+
+configs = {"fs.azure.account.auth.type": "OAuth",
+           "fs.azure.account.oauth.provider.type": "org.apache.hadoop.fs.azurebfs.oauth2.ClientCredsTokenProvider",
+           "fs.azure.account.oauth2.client.id": azure_clientid,
+           "fs.azure.account.oauth2.client.secret": azure_clientsecret,
+           "fs.azure.account.oauth2.client.endpoint": "https://login.microsoftonline.com/"+tenantid+"/oauth2/token"}
+
+# Optionally, you can add <directory-name> to the source URI of your mount point.
+dbutils.fs.mount(
+  source = "abfss://container_name@" + StorageAccount + ".dfs.core.windows.net/",
+  mount_point = "/mnt/" + StorageAccount,
+  extra_configs = configs)
